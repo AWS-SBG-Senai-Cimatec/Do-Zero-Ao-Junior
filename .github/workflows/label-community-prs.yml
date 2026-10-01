@@ -1,0 +1,60 @@
+name: Triage External PRs
+
+on:
+  pull_request_target:
+    types: [opened, ready_for_review]
+
+# Concede apenas as permissões estritamente necessárias para esta automação
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  label-external:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate author and apply label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pr = context.payload.pull_request;
+            
+            if (!pr) {
+              core.setFailed("Payload não contém o objeto pull_request.");
+              return;
+            }
+
+            const username = pr.user.login;
+            const prNumber = pr.number;
+
+            try {
+              const res = await github.rest.repos.getCollaboratorPermissionLevel({
+                owner,
+                repo,
+                username,
+              });
+              
+              const perm = res.data.permission;
+              const isInternal = (perm === 'admin' || perm === 'write');
+
+              if (!isInternal) {
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: prNumber,
+                  labels: ['Community']
+                });
+                core.info(`Label 'Community' adicionada com sucesso ao PR #${prNumber} (Autor: @${username})`);
+              } else {
+                core.info(`Autor @${username} possui permissão de ${perm}. Nenhuma label externa necessária.`);
+              }
+            } catch (err) {
+              core.warning(`Falha ao checar permissão de @${username}: ${err.message}. Rotulando preventivamente.`);
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: prNumber,
+                labels: ['Community']
+              });
+            }
