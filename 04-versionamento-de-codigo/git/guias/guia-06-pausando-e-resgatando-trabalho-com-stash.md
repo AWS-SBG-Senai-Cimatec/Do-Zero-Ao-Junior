@@ -1,93 +1,117 @@
-# Guia 06: Pausando e Resgatando Trabalho com Git Stash
+# 🧪 Laboratório Prático: Guia 06 - Pausando e Resgatando Trabalho com Git Stash
 
-> 💡 **Analogia da Gaveta Espacial:** Imagine que você está montando um quebra-cabeça na sua mesa de trabalho, mas precisa usá-la imediatamente para assinar um documento urgente. Em vez de desfazer o quebra-cabeça ou jogar tudo no chão, você pega uma gaveta especial, guarda todas as peças exatamente no estado em que estão, limpa a mesa, resolve o problema urgente e depois devolve as peças para a mesa no mesmo lugar. O `git stash` é essa gaveta!
-
----
-
-## 📌 Entendendo o Contexto
-
-No cotidiano do desenvolvimento, é extremamente comum estar no meio de uma tarefa quando surge uma prioridade crítica: um bug em produção que precisa de correção imediata ou um pedido urgente de colega para revisar outra branch.
-
-Se você tentar mudar de branch (`git checkout` ou `git switch`) com alterações incompletas ou com código que nem sequer compila/funciona, o Git pode impedir a troca para não sobrescrever seu trabalho, ou carregar essas alterações indesejadas para a nova branch.
-
-O **`git stash`** resolve isso permitindo **guardar temporariamente suas alterações não salvas** (sem a necessidade de fazer um commit "sujo" de rascunho) e deixando seu diretório de trabalho completamente limpo.
+> 📌 **Cenário:** Troca urgente de contexto: você está no meio de uma implementação que ainda não funciona e precisa corrigir um bug urgente em outra ramificação sem perder seu progresso.
+>
+> 🔹 **Guardar trabalho incompleto:** `git stash push -m "descrição"`  
+> 🔹 **Resgatar o trabalho:** `git stash pop`
 
 ---
 
-## 🚀 Passo a Passo Prático
+## 🎯 Pré-requisitos
 
-### Passo 1: Guardando o Trabalho Incompleto (`git stash push`)
+* Git instalado no seu computador.
+* Conhecimentos básicos de `git checkout`, `git switch`, `git branch` e `git commit`.
 
-Quando precisar interromper o que está fazendo, guarde seu progresso atual atribuindo uma mensagem descritiva para facilitar a identificação depois.
+---
+
+## 🚀 Roteiro Hands-on: Passo a Passo
+
+### 📦 Passo 1: Preparando o Repositório de Teste
+
+Abra o terminal e execute o bloco abaixo para criar o repositório de teste e um commit inicial na branch `main`:
+
+```bash
+# 1. Cria a pasta do laboratório e entra nela
+mkdir lab-git-stash && cd lab-git-stash
+
+# 2. Inicializa o repositório Git na branch main
+git init -b main
+
+# 3. Cria um arquivo base do projeto e realiza o commit inicial
+echo "console.log('Sistema Online');" > app.js
+git add app.js
+git commit -m "docs: commit inicial do projeto"
+```
+
+> 🔍 **Verificação:** Execute `git log --oneline`. Você deve ver o commit inicial na branch `main`.
+
+---
+
+### 🚧 Passo 2: Simulando o Trabalho Incompleto que Não Funciona
+
+Agora crie uma nova ramificação (*branch*) e comece uma alteração que ficará incompleta:
+
+```bash
+# 1. Cria e muda para a branch da nova funcionalidade
+git checkout -b feature/autenticacao
+
+# 2. Modifica o arquivo app.js simulando uma implementação incompleta
+echo "console.log('Nova funcionalidade de login em andamento...');" >> app.js
+```
+
+> 🔍 **Verificação:** Execute `git status`. Observe que o arquivo `app.js` está modificado (*modified*), mas o código ainda não funciona e não deve ser commitado.
+
+---
+
+### 🚨 Passo 3: Guardando o Trabalho Incompleto (`git stash push`)
+
+Surgiu um bug urgente em outra ramificação! Para não perder o progresso nem fazer um commit de código quebrado, guarde o trabalho no stash:
 
 ```bash
 # Guardando as alterações no stash com uma descrição clara
-git stash push -m "wip: implementação da tela de perfil incompleta"
+git stash push -m "wip: implementacao do login incompleta"
 ```
 
-#### 🔍 O que acontece:
-* Suas modificações nos arquivos editados somem do diretório de trabalho (*working directory*).
-* O estado do seu projeto volta exatamente ao último *commit* realizado.
-* Seu diretório fica limpo para você mudar de branch com segurança.
+> 🔍 **Verificação:** Execute `git status`. O diretório estará limpo (`working tree clean`), permitindo trocar de branch com segurança.
 
 ---
 
-### Passo 2: Mudando de Contexto e Resolvendo a Urgência
+### 🛠️ Passo 4: Corrigindo o Bug em Outra Ramificação
 
-Com a mesa limpa, você pode trocar de branch e realizar a correção necessária sem interferências.
+Com a mesa limpa, mude de contexto para resolver a emergência:
 
 ```bash
-# 1. Muda para a branch principal
+# 1. Volta para a branch main
 git switch main
 
-# 2. Cria a branch para a correção urgente
-git checkout -b fix/bug-login-urgente
+# 2. Cria a branch para a correção urgente do bug
+git checkout -b fix/bug-urgente
 
-# 3. Faz a correção, adiciona e realiza o commit
-git add .
-git commit -m "fix: corrige erro critico de autenticacao no login"
+# 3. Realiza a correção no arquivo
+echo "console.log('Bug critico corrigido!');" >> app.js
+git add app.js
+git commit -m "fix: resolve erro critico de execucao"
 
-# 4. Envia/integra a solução
+# 4. Integra a correção na main
 git switch main
-git merge fix/bug-login-urgente
+git merge fix/bug-urgente
 ```
+
+> 🔍 **Verificação:** Execute `git log --oneline` na `main` para ver a correção aplicada.
 
 ---
 
-### Passo 3: Voltando e Resgatando o Trabalho (`git stash pop`)
+### 🎁 Passo 5: Voltando e Resgatando o Trabalho (`git stash pop`)
 
-Após resolver a emergência, é hora de voltar para a sua branch de funcionalidade e resgatar o trabalho que estava guardado na "gaveta".
+Após resolver a emergência, volte para a sua ramificação original e resgate o trabalho que estava guardado:
 
 ```bash
-# 1. Retorna para sua branch original
-git switch feature/tela-perfil
+# 1. Retorna para a branch da sua funcionalidade
+git switch feature/autenticacao
 
-# 2. Restaura as alterações e as remove da gaveta (stash)
+# 2. Resgata as alterações salvas e remove do stash
 git stash pop
 ```
 
-#### 🔍 Opções para resgatar o trabalho:
-* **`git stash pop`**: Aplica as alterações salvas de volta ao seu código e **remove** o registro da lista do stash.
-* **`git stash apply`**: Aplica as alterações salvas de volta, mas **mantém** uma cópia salva na lista do stash por segurança.
+> 🔍 **Verificação:** Execute `git status`. O arquivo `app.js` voltou ao estado modificado exatamente como você o deixou antes da emergência!
 
 ---
 
-## 🛠️ Comandos Essenciais para Gerenciar a Gaveta (Stash)
+## 🛠️ Comandos de Apoio e Gerenciamento
 
 | Comando | Descrição / Objetivo |
 | :--- | :--- |
-| **`git stash list`** | Lista todos os rascunhos guardados no stash (ex: `stash@{0}`, `stash@{1}`). |
-| **`git stash pop`** | Restaura o rascunho mais recente e o remove do stash. |
-| **`git stash apply stash@{N}`** | Restaura um stash específico da lista sem removê-lo. |
-| **`git stash drop stash@{N}`** | Descarta/apaga um stash específico que não será mais utilizado. |
-| **`git stash clear`** | Limpa **todos** os rascunhos armazenados na lista do stash. |
-
----
-
-## ⚠️ Boas Práticas
-
-1. **Sempre use `-m "descrição"`:** Salvar com `git stash push -m "sua mensagem"` evita que você fique perdido sem saber o que cada `stash@{N}` contém quando a lista crescer.
-2. **Arquivos Não Rastreados (*Untracked*):** Por padrão, arquivos novos criados que ainda não foram adicionados com `git add` não são guardados pelo stash simples. Para incluí-los, use:
-   ```bash
-   git stash push -u -m "wip: inclui novos arquivos criados"
-   ```
+| `git stash list` | Lista todos os rascunhos salvos no stash. |
+| `git stash pop` | Restaura o trabalho mais recente e o remove da lista. |
+| `git stash apply` | Restaura o trabalho mas o mantém salvo no stash. |
+| `git stash clear` | Limpa todos os rascunhos armazenados. |
