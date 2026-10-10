@@ -1,96 +1,215 @@
-# Guia 05: Mantendo o Histórico Limpo com Rebase
+# Guia 05: Mantendo o Histórico Limpo com Git Rebase
 
-> 💡 **Analogia da Linha do Tempo:** Imagine que o histórico do seu projeto é a edição de um livro. O `git merge` junta dois capítulos criando um parágrafo que diz *"E aqui estas duas histórias se juntaram"*. Já o `git rebase` faz com que parecido que você escreveu os novos capítulos logo após a última versão do livro, mantendo uma leitura contínua, limpa e fluida.
-
----
-
-## 📌 Entendendo o Contexto
-
-No trabalho em equipe usando Git, é normal criar uma *branch* (ramificação) para trabalhar em uma nova funcionalidade (*feature*). No entanto, enquanto você desenvolve sua tarefa por alguns dias, a equipe continua aprovando e integrando outros códigos na linha principal (`main`).
-
-Quando chega o momento de enviar o seu trabalho para a aprovação (via *Pull Request*), você se depara com dois cenários:
-1. Sua *branch* ficou **desatualizada** em relação à `main`.
-2. Seu histórico local está cheio de *commits* de rascunho (ex: *"ajuste rápido"*, *"testando algo"*, *"agora vai"*).
-
-O objetivo deste guia é te ensinar a usar o **`git rebase`** para resolver esses dois problemas: sincronizar seu trabalho sem poluir a linha do tempo e organizar seus *commits* rascunho em uma entrega profissional.
+Este guia ensina como utilizar o **`git rebase`** e o **`git rebase interativo`** para organizar o seu histórico de commits, garantindo um repositório limpo, linear e sem commits desnecessários de mesclagem.
 
 ---
 
-## Passo 1: Sincronizando com a branch principal (`git rebase main`)
+## 💡 Entendendo o Contexto: Por que usar Rebase?
 
-### O Problema: Histórico em Linha Dupla ou "Nó de Cadarço"
-Se usarmos o `git merge main` para atualizar nossa *branch*, o Git cria um *commit de merge* apenas para unir as pontas. Fazer isso repetidas vezes transforma o histórico de *commits* em um emaranhado de linhas cruzadas.
+Imagine que você está escrevendo um capítulo de um livro em parceria com outra pessoa:
+* **Merge tradicional:** Você pega as páginas do seu parceiro e cola no meio do seu rascunho com uma nota adesiva dizendo *"Ajuste feito em 10/10"*. O livro fica legível, mas cheio de marcas de costura (os chamados *merge commits*).
+* **Rebase:** Você destaca o seu capítulo temporariamente, atualiza as páginas base com o trabalho mais recente do seu parceiro e depois reescreve o seu capítulo no topo dessa nova base. O resultado é um texto contínuo e perfeitamente linear.
 
-<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/f09cc29a-34a4-41ee-85a5-da5b91e783b6" />
+---
 
+## 🛠️ Preparando o Ambiente Prático (Laboratório)
 
-### A Solução: Rebase
-O `git rebase main` pega todos os *commits* que você fez na sua *branch*, remove-os temporariamente, atualiza sua base com o estado mais recente da `main` e, por fim, reaplica as suas alterações uma a uma no topo.
+Para praticar todos os conceitos deste guia na prática, crie um ambiente de testes local usando a **Opção B** (geração automática do repositório de treinos via terminal).
+
+### Execução em um único comando
+Abra seu terminal e cole o bloco abaixo (cole com ctrl+shift+v):
 
 ```bash
-# 1. Garanta que está na sua branch de funcionalidade
-git checkout feature/sua-feature
+mkdir lab-git-rebase && cd lab-git-rebase && git init -b main && \
+echo "# Lab Rebase" > README.md && git add . && git commit -m "docs: commit inicial" && \
+git checkout -b feature/autenticacao && \
+echo "function login(){}" > auth.js && git add . && git commit -m "wip: login" && \
+echo "// fix" >> auth.js && git add . && git commit -m "wip: ajustes" && \
+echo "function logout(){}" >> auth.js && git add . && git commit -m "feat: auth completa" && \
+git checkout main && \
+echo "const CONFIG = {};" > config.js && git add . && git commit -m "chore: add config" && \
+git checkout feature/autenticacao
+```
+# Guia 05: Mantendo o Histórico Limpo com Git Rebase
 
-# 2. Reaplica seus commits no topo da main atualizada
+## O que este comando acabou de fazer?
+
+- Criou o repositório com a branch `main` e um commit inicial (`docs: commit inicial`).
+- Criou a branch de funcionalidade `feature/autenticacao`.
+- Adicionou 3 commits de rascunho/WIP na branch da feature (`wip: login`, `wip: ajustes`, `feat: auth completa`).
+- Simulou uma atualização paralela na `main` (`chore: add config`).
+- Deixou você posicionado na branch `feature/autenticacao`.
+
+---
+
+## 🔍 Step 2: Inspecionando a Divergência no Histórico
+
+Antes de executar qualquer ação, execute o comando abaixo no terminal para visualizar o gráfico das ramificações:
+
+**Bash**
+
+```bash
+git log --oneline --graph --all
+```
+
+**Saída esperada no terminal:**
+
+```text
+* 4a82f1b (main) chore: add config
+| * 7b31c9a (HEAD -> feature/autenticacao) feat: auth completa
+| * 2e15d8f wip: ajustes
+| * 9f04e1d wip: login
+|/
+* 1a812f4 docs: commit inicial
+```
+
+<img width="705" height="187" alt="image" src="https://github.com/user-attachments/assets/426f9dfe-e99a-47e3-8a2e-08bd71538345" />
+
+
+Observe que a `main` e a `feature/autenticacao` se separaram a partir do commit inicial.
+
+---
+
+## 🚀 Step 3: Atualizando a Branch com `git rebase main`
+
+### O Problema
+
+Sua branch `feature/autenticacao` está desatualizada em relação ao commit `chore: add config` da `main`.
+
+### A Execução
+
+Ainda na branch `feature/autenticacao`, execute:
+
+**Bash**
+
+```bash
 git rebase main
 ```
 
-![Terminal executando git rebase main ou histórico linear resultante](placeholder-imagem-02-depois-do-rebase.png)
+**Saída esperada no terminal:**
 
-### 🔍 Entendendo o que acontece por trás dos panos:
-* **Base Reorganizada:** A sua *branch* passa a "fingir" que foi criada **hoje**, a partir da versão mais atual da `main`.
-* **Histórico Linear:** Não há commits extras de mesclagem (`Merge branch 'main' into...`).
+```text
+Successfully rebased and updated refs/heads/feature/autenticacao.
+```
+
+### O que aconteceu por trás dos panos?
+
+1. O Git guardou seus 3 commits em uma área temporária.
+2. Trouxe o commit `chore: add config` da `main` para a sua branch.
+3. Reaplicou os seus 3 commits um a um por cima do histórico atualizado.
+
+Confirme a nova estrutura linear rodando:
+
+**Bash**
+
+```bash
+git log --oneline --graph
+```
+
+**Saída esperada:**
+
+```text
+* 8c52d3a (HEAD -> feature/autenticacao) feat: auth completa
+* 5b41e2f wip: ajustes
+* 3a04c1d wip: login
+* 4a82f1b (main) chore: add config
+* 1a812f4 docs: commit inicial
+```
+
+<img width="658" height="164" alt="image" src="https://github.com/user-attachments/assets/3e86f9ad-e0a4-4467-aad6-5a1db846b1bd" />
 
 ---
 
-## Passo 2: Agrupando commits rascunho (`git rebase -i`)
+## 🧹 Step 4: Limpando os Commits com Rebase Interativo (`-i`)
 
-> 💡 **Analogia da Mochila de Viagem:** Quando você está arrumando as malas no quarto, joga as roupas de qualquer jeito (commits de rascunho). Mas na hora de fechar a mala para viajar, você dobra tudo e organiza em compartimentos limpos (*squash*).
+### O Problema
 
-### O Cenário
-Você realizou vários commits pequenos enquanto desenvolvia:
+Você possui commits fragmentados (`wip: login`, `wip: ajustes`) que não agregam valor ao histórico principal do projeto.
 
-![Lista de commits bagunçados no log](placeholder-imagem-03-commits-baguncados.png)
+### A Execução
 
-Antes de abrir o *Pull Request*, queremos consolidar esses 3 commits rascunhos em apenas **1 commit semântico e organizado**.
+Abra a interface do rebase interativo para os últimos 3 commits:
 
-### Comandos para iniciar o Rebase Interativo:
+**Bash**
 
 ```bash
-# Inicia o rebase interativo olhando para os últimos 3 commits
 git rebase -i HEAD~3
 ```
 
-### 🛠️ No Editor do Terminal
+O Git abrirá o seu editor de texto padrão com o seguinte conteúdo:
 
-Ao executar o comando, o Git abre o seu editor de texto com a lista de commits:
-
-```text
-pick a1b2c3d feat: adiciona estrutura da tela de login
-pick e4f5g6h wip: ajusta estilos do botao
-pick i7j8k9l fix: corrige alinhamento do formulario
-```
-
-Para juntar os commits secundários no primeiro:
-1. Mantenha o primeiro commit como **`pick`** (ou `p`).
-2. Mude os commits seguintes para **`squash`** (ou `s`).
-
-![Editor de texto configurado com os comandos pick e squash](placeholder-imagem-04-editor-rebase-interativo.png)
-
-Após salvar e fechar o editor, defina a mensagem final do commit consolidado:
+**Plaintext**
 
 ```text
-feat: implementa tela de login completa com estilos e validações
+pick 3a04c1d wip: login
+pick 5b41e2f wip: ajustes
+pick 8c52d3a feat: auth completa
+
+# Commandes:
+# p, pick <commit> = usar commit
+# s, squash <commit> = usar commit, mas fundir com o commit anterior
 ```
 
-![Resultado final no terminal com git log mostrando commit único e limpo](placeholder-imagem-05-historico-consolidado.png)
+### Modificação no Editor
+
+Substitua a palavra `pick` por `squash` (ou apenas `s`) nos commits que você deseja fundir no primeiro:
+
+**Plaintext**
+
+```text
+pick 3a04c1d wip: login
+squash 5b41e2f wip: ajustes
+squash 8c52d3a feat: auth completa
+```
+
+Salve e feche o editor.
+
+Em seguida, uma nova tela se abrirá para definir a mensagem final unificada. Substitua o texto antigo por uma mensagem limpa e semântica:
+
+**Plaintext**
+
+```text
+feat: implementa modulo completo de autenticacao
+```
 
 ---
 
-## 🛑 A Regra de Ouro do Rebase
+## ✅ Step 5: Verificação do Resultado Final
 
-> ⚠️ **Atenção Máxima:** **NUNCA faça rebase em branches públicas/compartilhadas!**
-> 
-> Como o `git rebase` **reescreve os hashes** dos commits, se você fizer rebase em uma branch que outros desenvolvedores já baixaram (`push`), você irá quebrar o repositório deles.
-> 
-> **Regra prática:** Use o `rebase` apenas na sua *branch* local **antes** de fazer o `push` para o servidor ou abrir o *Pull Request*.
+Execute o comando de verificação:
+
+**Bash**
+
+```bash
+git log --oneline --graph
+```
+
+**Resultado esperado:**
+
+```text
+* e91f2a4 (HEAD -> feature/autenticacao) feat: implementa modulo completo de autenticacao
+* 4a82f1b (main) chore: add config
+* 1a812f4 docs: commit inicial
+```
+
+O histórico agora está perfeitamente limpo, organizado e pronto para ser integrado à branch principal!
+
+---
+
+## 📑 Tabela de Referência de Comandos do Rebase Interativo
+
+| Comando | Sigla | Função |
+|---|---|---|
+| `pick` | `p` | Mantém o commit no histórico. |
+| `squash` | `s` | Funde o commit com o anterior, unindo as mensagens. |
+| `fixup` | `f` | Funde o commit com o anterior, descartando a mensagem deste commit. |
+| `reword` | `r` | Mantém o commit, mas abre o editor para alterar a mensagem. |
+| `drop` | `d` | Remove o commit completamente do histórico. |
+
+---
+
+## ⚠️ Regra de Ouro do Rebase
+
+**Nunca faça rebase em branches públicas ou compartilhadas!**
+
+O rebase reescreve o histórico de hashes. Utilize-o apenas nas suas branches locais antes de abrir o Pull Request.
