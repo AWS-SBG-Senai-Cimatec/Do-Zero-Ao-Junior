@@ -1,7 +1,7 @@
 # 04. `➕ git-add — Preparação de Alterações (Staging Area)`
 
 ## 📖 Visão Geral
-O `git add` move as alterações feitas nos seus ficheiros do diretório de trabalho para a área de preparação ([staging area](./04-git-add.md)). É aqui que é selecionado exatamente o que deseja incluir no próximo [commit](./05-git-commit.md).
+O `git add` move as alterações feitas nos seus ficheiros do diretório de trabalho para a área de preparação (staging area). É aqui que é selecionado exatamente o que deseja incluir no próximo [commit](./05-git-commit.md).
 
 ## 📋 Sintaxe Oficial
 ```bash
