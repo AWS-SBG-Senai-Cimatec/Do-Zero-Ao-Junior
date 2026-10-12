@@ -15,4 +15,3 @@ Acesse os guias detalhados de cada comando deste tópico:
 3. [**03-git-status.md**](./03-git-status.md) — Inspeção do estado do repositório.
 4. [**04-git-add.md**](./04-git-add.md) — Preparação de alterações (Stage).
 5. [**05-git-commit.md**](./05-git-commit.md) — Registro de snapshots no histórico.
-1. ---
