@@ -1,4 +1,4 @@
-# 🚀 Tópico 1: Fluxo Básico (Comandos Fundamentais de Entrada)
+# 🔄 Tópico 1: Fluxo Básico (Comandos Fundamentais de Entrada)
 
 >💡 **A Analogia Central:** Imagine que você é um fotógrafo profissional documentando a construção de um edifício. Você não tira apenas uma foto do prédio pronto; você registra cada etapa importante para ter um histórico completo.
 >
