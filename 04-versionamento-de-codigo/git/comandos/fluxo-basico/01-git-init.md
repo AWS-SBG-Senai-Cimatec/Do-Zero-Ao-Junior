@@ -27,6 +27,6 @@ git init -b main meu-projeto
 
 ## 💡 Boas Práticas
 
-* ✅ **O que fazer:** Sempre utilize `-b main` para seguir o padrão moderno das empresas em vez do nome legado (`master`).
+* ✅ **O que fazer:** Sempre utilize `-b main` para seguir o padrão moderno das empresas em vez do nome antigo (`master`).
 * ❌ **O que evitar:** Nunca rode `git init` dentro de uma pasta que já é um repositório Git ou na pasta raiz do sistema para evitar perda de dados e lentidão no computador (ex: dentro de `C:\Users\SeuNome`).
 ---
