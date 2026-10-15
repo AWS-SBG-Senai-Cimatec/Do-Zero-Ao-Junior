@@ -14,6 +14,8 @@ Você apenas atualiza as suas informações sobre o que está lá fora, mantendo
 
 O `git fetch` baixa todas as novidades que aconteceram no repositório remoto (novas branches, commits de outras pessoas), mas **não altera o código em que você está trabalhando no momento**. Ele guarda esses dados em uma "área de visualização segura" (as branches remotas locais, como `origin/main`).
 
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/a5b7bfa8-4b52-4f0e-ab86-ed51caeeefc6" />
+
 ---
 
 ## 🛠️ Principais Comandos e Exemplos Práticos
