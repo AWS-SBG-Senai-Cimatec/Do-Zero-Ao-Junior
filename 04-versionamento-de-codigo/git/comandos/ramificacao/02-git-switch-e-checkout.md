@@ -1,30 +1,64 @@
-## 2. 🔀 `git-switch-e-checkout` — Transição Moderna e Legada
+## 2. 🔀 `git-switch` e `git-checkout` — Transição Moderna e Legada
 
-Utilizado para alternar o seu ambiente de trabalho de um ramo para outro.
+Utilizado para alternar o seu ambiente de trabalho de uma branch para outra.
 
-### 💻 Lista de Comandos Práticos
+### 💻 Lista de Comandos Práticos e Saídas
 
 ```bash
-# Transição moderna: Muda para o ramo especificado
-git switch nome-do-ramo
-
-# Cria o ramo e faz a transição imediata para ele
-git switch -c nome-do-novo-ramo
-
-# Forma tradicional/legada de trocar de ramo
-git checkout nome-do-ramo
-
-# Forma tradicional/legada de criar e entrar em um novo ramo
-git checkout -b nome-do-novo-ramo
-
-OBS.: Recomenda-se utilizar apenas o git switch, pois é mais atualizado. 
+# Transição moderna: Muda para a branch especificada
+git switch nome-da-branch
 ```
+
+* **Saída esperada:**
+  ```text
+  Switched to branch 'nome-da-branch'
+  ```
+
+---
+
+```bash
+# Cria a branch e faz a transição imediata para ela
+git switch -c nome-da-nova-branch
+```
+
+* **Saída esperada:**
+  ```text
+  Switched to a new branch 'nome-da-nova-branch'
+  ```
+
+---
+
+```bash
+# Forma tradicional/legada de trocar de branch
+git checkout nome-da-branch
+```
+
+* **Saída esperada:**
+  ```text
+  Switched to branch 'nome-da-branch'
+  ```
+
+---
+
+```bash
+# Forma tradicional/legada de criar e entrar em uma nova branch
+git checkout -b nome-da-nova-branch
+```
+
+* **Saída esperada:**
+  ```text
+  Switched to a new branch 'nome-da-nova-branch'
+  ```
+
+---
+
+> **OBS.:** Recomenda-se utilizar o `git switch`, pois é o comando moderno e focado exclusivamente nessa finalidade.
+
+---
 
 ### 🔍 Explicação Palavra a Palavra
 
-* **`switch`**: Significa **alternar** ou **trocar**. É o comando moderno e recomendado para navegação entre ramos.
-* **`-c`** *(create)*: Cria o ramo informado e já alterna a sua sessão de trabalho para dentro dele.
-* **`checkout`**: Comando clássico que significa **registrar saída/entrada**. Embora ainda funcione, hoje prefere-se o `switch` por ser mais simples.
-* **`-b`** *(branch)*: Parâmetro usado exclusivamente no `checkout` antigo para criar um ramo antes de trocar.
-
----
+* **`switch`**: Significa **alternar** ou **trocar**. É o comando moderno e recomendado para navegação entre branches.
+* **`-c`** *(create)*: Cria a branch informada e já alterna a sua sessão de trabalho para dentro dela.
+* **`checkout`**: Comando clássico que significa **registrar saída/entrada**. Embora ainda funcione, hoje prefere-se o `switch` por ter foco exclusivo no fluxo de branches.
+* **`-b`** *(branch)*: Parâmetro usado exclusivamente no `checkout` antigo para criar uma branch antes de trocar.
