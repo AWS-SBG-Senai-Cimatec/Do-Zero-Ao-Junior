@@ -24,15 +24,21 @@ O Git local precisa saber *onde* na internet o repositório remoto está guardad
   ```bash
   git remote add origin https://github.com/seu-usuario/meu-projeto.git
   ```
+* **Saída esperada:**
+  ```text
+  (Sem saída no terminal em caso de sucesso)
+  ```
 
 ### 2. `git remote -v` (Verbose)
 * **O que faz:** Lista todos os endereços remotos conectados ao seu projeto, mostrando o apelido e a URL correspondente (tanto para envio quanto para recebimento).
 * **Exemplo:**
   ```bash
   git remote -v
-  # Saída esperada:
-  # origin  https://github.com/seu-usuario/meu-projeto.git (fetch)
-  # origin  https://github.com/seu-usuario/meu-projeto.git (push)
+  ```
+* **Saída esperada:**
+  ```text
+  origin	https://github.com/seu-usuario/meu-projeto.git (fetch)
+  origin	https://github.com/seu-usuario/meu-projeto.git (push)
   ```
 
 ### 3. `git remote set-url origin <nova-url>`
@@ -41,6 +47,10 @@ O Git local precisa saber *onde* na internet o repositório remoto está guardad
   ```bash
   git remote set-url origin https://github.com/seu-usuario/novo-nome-projeto.git
   ```
+* **Saída esperada:**
+  ```text
+  (Sem saída no terminal em caso de sucesso)
+  ```
 
 ### 4. `git remote remove <nome>`
 * **O que faz:** Desconecta o link entre o seu repositório local e o remoto especificado. Ele não apaga nada na nuvem, apenas remove o atalho do seu computador.
@@ -48,10 +58,18 @@ O Git local precisa saber *onde* na internet o repositório remoto está guardad
   ```bash
   git remote remove origin
   ```
+* **Saída esperada:**
+  ```text
+  (Sem saída no terminal em caso de sucesso)
+  ```
 
 ### 5. `git remote add upstream <url>`
 * **O que faz:** Muito usado em projetos de código aberto (*Open Source*). Quando você faz um *fork* (cópia) de um projeto de outra pessoa, o `origin` aponta para a *sua* cópia, e o `upstream` aponta para o repositório **original** do dono do projeto, permitindo que você receba atualizações oficiais dele.
 * **Exemplo:**
   ```bash
   git remote add upstream https://github.com/dono-original/projeto-famoso.git
+  ```
+* **Saída esperada:**
+  ```text
+  (Sem saída no terminal em caso de sucesso)
   ```
