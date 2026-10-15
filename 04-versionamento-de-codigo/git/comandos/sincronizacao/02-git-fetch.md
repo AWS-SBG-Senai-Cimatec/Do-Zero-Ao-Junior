@@ -24,10 +24,26 @@ O `git fetch` baixa todas as novidades que aconteceram no repositório remoto (n
   ```bash
   git fetch origin
   ```
+* **Saída esperada:**
+  ```text
+  remote: Enumerating objects: 5, done.
+  remote: Counting objects: 100% (5/5), done.
+  remote: Compressing objects: 100% (3/3), done.
+  remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+  Unpacking objects: 100% (3/3), 320 bytes | 320.00 KiB/s, done.
+  From https://github.com/usuario/seu-repositorio
+   * [new branch]      feature/login -> origin/feature/login
+     a1b2c3d..e4f5g6h  main          -> origin/main
+  ```
 
 ### 2. `git fetch --prune` ou `git fetch -p`
 * **O que faz:** Além de baixar as novidades, ele **limpa a casa**. Se alguém apagou uma branch lá no GitHub (remoto), esse comando avisa o seu computador e remove os rastros daquela branch que já não existe mais.
 * **Exemplo:**
   ```bash
   git fetch --prune
+  ```
+* **Saída esperada:**
+  ```text
+  From https://github.com/usuario/seu-repositorio
+   - [deleted]         (none)     -> origin/feature-antiga
   ```
