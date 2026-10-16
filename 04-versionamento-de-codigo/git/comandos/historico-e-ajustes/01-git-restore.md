@@ -1,61 +1,145 @@
-# git restore
+# `git restore`
 
-O git restore é útil quando você fez alterações em um arquivo e quer voltar à versão anterior sem mexer diretamente no histórico de commits. Ele também permite retirar arquivos da área de staging sem perder as modificações feitas.
+O `git restore` é um comando utilizado para restaurar arquivos, descartando alterações locais ou recuperando versões anteriores do conteúdo. Ele também permite retirar arquivos da área de staging sem apagar as modificações feitas neles.
 
-## Como funciona
+## 1. Entendendo o conceito
+
+Imagine que você está escrevendo um trabalho e faz alterações em um parágrafo, mas depois percebe que prefere voltar à versão anterior. O `git restore` funciona de maneira semelhante: ele permite recuperar uma versão anterior do arquivo, desde que ela esteja disponível no estado de referência utilizado pelo Git.
+
+No Git, é importante distinguir três áreas:
+
+- **Diretório de trabalho (*working tree*):** onde você edita os arquivos.
+- **Índice (*staging area*):** área intermediária em que você prepara as alterações que deseja incluir no próximo commit.
+- **Repositório:** onde ficam registrados os commits e o histórico do projeto.
+
+O índice funciona como uma bandeja de preparação: você escolhe quais alterações quer incluir no próximo registro antes de confirmar o commit.
+
+## 2. Como funciona
+
+A sintaxe básica é:
 
 ```bash
 git restore <arquivo>
 ```
 
-Esse comando restaura o arquivo para o conteúdo registrado no índice do Git. Em uma situação comum, isso significa descartar as alterações locais feitas desde o último `git add` ou commit, dependendo do estado do arquivo.
+Esse comando restaura o arquivo no diretório de trabalho de acordo com o conteúdo do índice. Por padrão, as alterações locais nesse arquivo que não estejam representadas no índice são descartadas.
 
-### Descartando alterações
+### Principais usos
 
-Imagine que você modificou `main.c`, mas decidiu não manter as mudanças:
-
-```bash
-git restore main.c
-```
-
-O arquivo volta ao conteúdo registrado no índice. Como as alterações descartadas podem ser difíceis de recuperar, confira o estado do arquivo antes de executar o comando.
-
-### Retirando um arquivo do staging
-
-Se você executou `git add main.c`, mas quer continuar editando antes de criar o commit, use:
-
-```bash
-git restore --staged main.c
-```
-
-O arquivo deixa de estar preparado para o próximo commit, mas as modificações continuam no diretório de trabalho.
-
-### Recuperando uma versão de outro commit
-
-Também é possível usar um commit como origem da restauração:
-
-```bash
-git restore --source=abc1234 -- main.c
-```
-
-Nesse exemplo, `abc1234` representa o identificador do commit desejado. O conteúdo desse commit é recuperado no arquivo, mas a branch continua onde estava.
-
-## Qual opção usar?
-
-| Comando | Resultado |
+| Comando | O que acontece |
 |---|---|
-| `git restore main.c` | Descarta alterações locais do arquivo. |
-| `git restore --staged main.c` | Retira o arquivo do staging e preserva as alterações locais. |
-| `git restore --source=abc1234 -- main.c` | Recupera o conteúdo do arquivo a partir de outro commit. |
+| `git restore arquivo.txt` | Restaura o arquivo de acordo com o índice, descartando alterações locais que não estejam nele. |
+| `git restore --staged arquivo.txt` | Retira o arquivo do staging, mantendo suas alterações no diretório de trabalho. |
+| `git restore --source=<commit> -- arquivo.txt` | Restaura o arquivo usando o conteúdo de um commit específico. |
 
-Antes de restaurar arquivos, vale conferir o que foi modificado:
+**Atenção:** o comando pode descartar alterações locais. Antes de executá-lo, confira o estado do repositório e, se necessário, salve seu trabalho.
+
+## 3. Exemplos práticos
+
+### Exemplo 1 — Descartar alterações locais
+
+Imagine que você modificou `arquivo.txt`, mas deseja recuperar a versão que está no índice.
+
+```bash
+git restore arquivo.txt
+```
+
+Confira o estado do repositório antes e depois:
 
 ```bash
 git status
-git diff
+git restore arquivo.txt
+git status
 ```
 
-**Atenção:** `git restore` não é a ferramenta indicada para desfazer um commit já compartilhado. Para isso, o `git revert` costuma ser mais apropriado, pois cria um novo commit que desfaz as alterações anteriores.
+Se o arquivo não tiver outras alterações pendentes, ele deixará de aparecer como modificado.
+
+### Exemplo 2 — Retirar um arquivo do staging
+
+Você executou `git add arquivo.txt`, mas decidiu que ainda precisa revisar o arquivo antes de incluí-lo no próximo commit.
+
+```bash
+git restore --staged arquivo.txt
+```
+
+O arquivo deixa de estar preparado para o próximo commit, mas suas modificações continuam no diretório de trabalho.
+
+Para conferir:
+
+```bash
+git status
+```
+
+### Exemplo 3 — Recuperar um arquivo de um commit anterior
+
+Você quer recuperar o conteúdo de `arquivo.txt` como estava em um commit específico.
+
+```bash
+git restore --source=a1b2c3d -- arquivo.txt
+```
+
+Nesse exemplo, `a1b2c3d` é apenas um identificador ilustrativo. Substitua-o pelo hash real do commit desejado.
+
+O conteúdo desse commit será colocado no diretório de trabalho. A alteração ainda não será registrada em um novo commit automaticamente.
+
+## 4. O que é o hash de um commit?
+
+O hash é um identificador gerado pelo Git para identificar um commit. Ele é representado por uma sequência de caracteres hexadecimais, formada pelos números de `0` a `9` e pelas letras de `a` a `f`.
+
+Pense nele como o código de identificação de uma versão registrada do projeto. Com esse identificador, você consegue referenciar um ponto específico do histórico.
+
+### Como descobrir o hash?
+
+Para visualizar os commits de forma resumida, utilize:
+
+```bash
+git log --oneline
+```
+
+Exemplo de saída ilustrativa:
+
+```text
+a1b2c3d Corrige validação do formulário
+e4f5g6h Adiciona tela de cadastro
+i7j8k9l Cria estrutura inicial
+```
+
+Os identificadores mostrados são exemplos. No seu repositório, os hashes e as mensagens serão diferentes.
+
+Para usar um commit no `git restore`, copie o identificador correspondente e informe-o em `--source`.
+
+## 5. Representação visual
+
+O fluxo abaixo mostra a diferença entre retirar um arquivo do staging e descartar alterações locais.
+
+```text
+RETIRAR DO STAGING
+
+Índice (staging)
+      |
+      | git restore --staged arquivo.txt
+      v
+Diretório de trabalho
+(continua com as modificações)
+
+
+DESCARTAR ALTERAÇÕES LOCAIS
+
+Índice (staging)
+      |
+      | git restore arquivo.txt
+      v
+Diretório de trabalho
+(volta ao conteúdo do índice)
+```
+
+## 6. Cuidados importantes
+
+- `git restore` não cria um novo commit.
+- `git restore --staged` retira as alterações do staging, mas não as apaga do diretório de trabalho.
+- `git restore <arquivo>` pode descartar modificações locais que ainda não foram salvas em um commit.
+- Ao utilizar `--source`, confira se o commit informado contém a versão do arquivo que você deseja recuperar.
+- Se estiver em dúvida, execute `git status` antes de restaurar o arquivo.
 
 ## Referências
 
