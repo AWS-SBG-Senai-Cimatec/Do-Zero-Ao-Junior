@@ -6,14 +6,13 @@
 
 Em um repositório, o trabalho aparece em **Issues** (tarefas, bugs, ideias) e **Pull Requests** (propostas de alteração no código). Com o tempo, esses itens acabam se espalhando, e fica mais difícil saber o que está parado, o que está em andamento e o que já terminou.
 
-É aí que entra o **GitHub Projects**. Ele nada mais é do que um painel que junta esses itens em um só lugar, mostrando o status e a prioridade de cada item, mesmo quando eles vêm de repositórios diferentes. Aqui o assunto é o Projects atual, que tomou o lugar dos Projetos clássicos. Mas quem pode ver e editar cada projeto varia a depender da organização e das equipes (Teams), que será um tema discutido no arquivo [[04 - organizations|04 - Organizations]].
-
+É aí que entra o **GitHub Projects**. Ele nada mais é do que um painel que junta esses itens em um só lugar, mostrando o status e a prioridade de cada item, mesmo quando eles vêm de repositórios diferentes. Aqui o assunto é o Projects atual, que tomou o lugar dos Projetos clássicos. Mas quem pode ver e editar cada projeto varia a depender da organização e das equipes (Teams), que será um tema discutido no arquivo [04 - Organizations](04-github-organizations.md)
 ---
 
 ## 1. O que é o GitHub Projects
 
 O GitHub Projects é o sistema de **gestão ágil** nativo do GitHub, baseado em **quadros Kanban** e **tabelas customizadas**. Kanban é um método visual em que o trabalho vira cartões, e os cartões andam pelas colunas de acordo com a etapa do processo.
-![[Pasted image 20261016191730.png|337]]
+[04 - Organizations](04-github-organizations.md)
 
 Um mesmo projeto pode ser visto de três formas (layouts), sem duplicar os dados:
 
