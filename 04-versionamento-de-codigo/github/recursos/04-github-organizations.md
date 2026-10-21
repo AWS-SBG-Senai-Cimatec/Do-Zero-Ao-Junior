@@ -68,7 +68,7 @@ Uma **Team** é um grupo de pessoas dentro da organização, organizado por áre
 
 Teams também podem ser organizadas em **parent e child teams**, em que a equipe filha herda as permissões da equipe pai. Dentro de uma Team, existem dois níveis: **Member** e **Maintainer** (este último pode gerenciar os membros e as configurações da Team).
 
-Uma Team também pode ser vinculada a um projeto do GitHub Projects (como no arquivo [[03 - GitHub Projects|03 - Projects]]), e a equipe vinculada recebe permissão de leitura nesse projeto.
+Uma Team também pode ser vinculada a um projeto do GitHub Projects (como no arquivo [03 - GitHub Projects](03-github-projects.md)), e a equipe vinculada recebe permissão de leitura nesse projeto.
 
 ### 3.2 Níveis de acesso
 
@@ -99,4 +99,4 @@ Na prática, mesmo quem tem permissão de **Write** não consegue enviar código
 
 ---
 
-[[03 - GitHub Projects|← Anterior: 03 - GitHub Projects]]
+[← Anterior: 03 - GitHub Projects](03-github-projects.md)
