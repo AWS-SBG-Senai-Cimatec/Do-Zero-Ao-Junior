@@ -119,4 +119,4 @@ Uma possibilidade:
 
 ---
 
-[← Anterior: 04 - Organizations](04-github-organizations.md) | [Próximo: 06 - Estratégias de Versionamento →](../06-estrategias-versionamento/estrategias-versionamento.md)
+[← Anterior: 04 - Fork](04-fork.md) | [Próximo: 06 - Estratégias de Versionamento →](../06-estrategias-versionamento/estrategias-versionamento.md)
