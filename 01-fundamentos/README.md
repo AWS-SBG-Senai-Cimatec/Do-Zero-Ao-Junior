@@ -1,7 +1,7 @@
 # Módulo 01: Fundamentos da Computação
 
 > **Trilha Do Zero ao Júnior — AWS Student Builder Group SENAI CIMATEC (2026.2)**  
-> **Status:** 🟡 Em produção
+> **Status:** 🟡 Em produção (Prazo de entrega da Sprint: até **12/11**)
 
 Muitas pessoas iniciam na programação decorando comandos de uma linguagem sem compreender **onde** e **como** aquele código realmente ganha vida. O resultado costuma ser frustração ao lidar com erros de memória, lentidão, travamentos ou ao tentar colocar um sistema para rodar em um servidor real na nuvem.
 
@@ -28,6 +28,7 @@ O conteúdo está organizado em três pilares fundamentais e progressivos:
 ```text
 01-fundamentos/
 ├── README.md                               # Índice principal do módulo e guia de estudos
+├── sub-issues/                             # Roteiros de entrega das Sub-issues (01 a 06)
 │
 ├── arquitetura-e-hardware/                 # O mundo físico: máquina, CPU e memória
 │   ├── 01-como-funciona-um-computador.md
@@ -47,7 +48,7 @@ O conteúdo está organizado em três pilares fundamentais e progressivos:
 
 ## 🖥️ 1. Arquitetura e Hardware (`arquitetura-e-hardware/`)
 
-Antes de uma linha de código executar qualquer lógica, ela depende de componentes físicos trabalhando em sincronia na casa dos bilionários de operações por segundo:
+Antes de uma linha de código executar qualquer lógica, ela depende de componentes físicos trabalhando em sincronia na casa dos bilhões de operações por segundo:
 
 1. **[Como Funciona um Computador](arquitetura-e-hardware/01-como-funciona-um-computador.md)**: O sistema binário (por que computadores usam `0` e `1`), representação de textos e números (ASCII/Unicode), a Arquitetura de Von Neumann (Entrada, Processamento, Memória e Saída) e como a placa-mãe conecta os barramentos.
 2. **[Como os Processadores Funcionam](arquitetura-e-hardware/02-como-os-processadores-funcionam.md)**: A anatomia da CPU (Unidade Lógica e Aritmética, Unidade de Controle e Registradores), o ciclo *Fetch-Decode-Execute*, frequência de *Clock* (GHz), diferença real entre *Cores* (núcleos físicos) e *Threads* (fluxos lógicos) e o papel da memória *Cache* (L1, L2, L3).
@@ -94,10 +95,10 @@ Para aproveitar este módulo sem se perder em detalhes excessivamente acadêmico
 
 - 🎓 **Aula Base (Hardware, CPU, Memória e SO)**: [CS50's Understanding Technology — Week 1: Hardware](https://cs50.harvard.edu/technology/weeks/1/) — Aula essencial de Harvard cobrindo os 4 primeiros tópicos deste módulo de maneira visual e acessível.
 - 📖 **Guia Prático (Compiladas vs. Interpretadas)**: [Diferenças entre Linguagens Interpretadas e Compiladas: Um Guia Prático para Iniciantes (CulturaDev)](https://culturadev.com.br/diferencas-entre-linguagens-interpretadas-e-compiladas-um-guia-pratico-para-iniciantes) — Leitura direta ao ponto sobre como o código é traduzido e executado.
+- 🐧 **Guia de Consulta Linux (100 Comandos)**: [Linux Command Cheat Sheet: 100 Essential Commands for System Administration and Development (Medium)](https://medium.com/@prateek.malhotra004/linux-command-cheat-sheet-100-essential-commands-for-system-administration-and-development-6ee91049d71a) — Excelente material de referência para consultar e aprender comandos Linux gradualmente no dia a dia.
 - 🗺️ **Inspiração de Trilha**: Roadmap "Do Zero ao Júnior" por **Renato Augusto** (Arquiteto de Soluções) — Referência de mercado para os temas essenciais da base de computação.
 - 🌐 **AWS SBG CIMATEC**: [Hub de Materiais Recomendados](https://awssbgcimateclanding.vercel.app/)
 
 ---
 
 [⬅️ Voltar para o Roadmap Principal](../README.md)
-
