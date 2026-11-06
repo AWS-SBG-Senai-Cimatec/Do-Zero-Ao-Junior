@@ -18,11 +18,11 @@ O GitHub Projects é o sistema de **gestão ágil** nativo do GitHub, baseado em
 kanban
     Todo
         auth[Implementar autenticação]@{ ticket: 12, priority: 'High', assigned: 'Rian' }
-        database[Configurar banco de dados]@{ ticket: 15, priority: 'Low' }
+        database[Configurar banco de dados]@{ ticket: 15, priority: 'Low', assigned: 'Guerra' }
 
     In Progress
         api[Desenvolver API REST]@{ ticket: 18, priority: 'High', assigned: 'Catarina' }
-        interface[Criar interface inicial]@{ ticket: 21, priority: 'Low' }
+        interface[Criar interface inicial]@{ ticket: 21, priority: 'Low', assigned: 'Victor' }
 
     In Review
         docs[Documentar endpoints]@{ ticket: 24, priority: 'Low', assigned: 'José' }
@@ -104,6 +104,7 @@ flowchart TD
 > **Dica:** escrever `Closes #12` na descrição da Pull Request faz a Issue ser fechada sozinha quando a PR é mesclada. É isso que dispara o movimento do cartão para Done.
 
 ---
-[Próximo: 04 - Organizations →](04-organizations.md)
+[Próximo: 04 - Organizations →](04-github-organizations.md)
+
 [← Anterior: 02 - Pages](02-pages.md)
 
