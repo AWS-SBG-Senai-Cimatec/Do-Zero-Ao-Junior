@@ -13,8 +13,24 @@ Em um repositório, o trabalho aparece em **Issues** (tarefas, bugs, ideias) e *
 ## 1. O que é o GitHub Projects
 
 O GitHub Projects é o sistema de **gestão ágil** nativo do GitHub, baseado em **quadros Kanban** e **tabelas customizadas**. Kanban é um método visual em que o trabalho vira cartões, e os cartões andam pelas colunas de acordo com a etapa do processo.
-<img width="1024" height="904" alt="image" src="https://github.com/user-attachments/assets/1e027b0a-1709-4069-bb64-1cb5f0925316" />
 
+```mermaid
+kanban
+    Todo
+        auth[Implementar autenticação]@{ ticket: 12, priority: 'High', assigned: 'Rian' }
+        database[Configurar banco de dados]@{ ticket: 15, priority: 'Low' }
+
+    In Progress
+        api[Desenvolver API REST]@{ ticket: 18, priority: 'High', assigned: 'Catarina' }
+        interface[Criar interface inicial]@{ ticket: 21, priority: 'Low' }
+
+    In Review
+        docs[Documentar endpoints]@{ ticket: 24, priority: 'Low', assigned: 'José' }
+
+    Done
+        repository[Configurar repositório]@{ ticket: 1, assigned: 'João' }
+        architecture[Definir arquitetura]@{ ticket: 5, assigned: 'Diego'  }
+```
 
 Um mesmo projeto pode ser visto de três formas (layouts), sem duplicar os dados:
 
@@ -43,7 +59,8 @@ flowchart LR
     A["Backlog"] --> B["To-do"] --> C["In Progress"] --> D["Review"] --> E["Done"]
 ```
 
-> ⚠️**PSIU!!!:** ao criar um quadro novo, o GitHub já traz três colunas prontas: **To-do**, **In Progress** e **Done**. Para ter também o **Backlog** e o **Review**, é só adicionar essas opções ao campo Status. E, se preferir outros nomes, cada coluna pode ser renomeada de acordo com a sua necessidade.
+> [!tip]
+> Ao criar um quadro novo, o GitHub já traz três colunas prontas: **To-do**, **In Progress** e **Done**. Para ter também o **Backlog** e o **Review**, é só adicionar essas opções ao campo Status. E, se preferir outros nomes, cada coluna pode ser renomeada de acordo com a sua necessidade.
 
 ---
 
@@ -87,4 +104,6 @@ flowchart TD
 > **Dica:** escrever `Closes #12` na descrição da Pull Request faz a Issue ser fechada sozinha quando a PR é mesclada. É isso que dispara o movimento do cartão para Done.
 
 ---
-[[04 - organizations|Próximo: 04 - Organizations →]]
+[Próximo: 04 - Organizations →](04-organizations.md)
+[← Anterior: 02 - Pages](02-pages.md)
+
