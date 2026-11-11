@@ -214,7 +214,7 @@ Entender a matemática dos pixels ajuda a compreender o tamanho dos arquivos na 
 
 ---
 
-## 3. Esquema Visual do Fluxo de Dados
+## Esquema Visual do Fluxo de Dados
 
 O diagrama abaixo ilustra a cadeia de abstração: desde o sinal elétrico no transistor até a interpretação de alto nível pelo software e exibição na tela.
 
@@ -234,7 +234,8 @@ graph TD
 
 ---
 
-## 4. Resumo / Principais Pontos de Atenção (Key Takeaways)
+## Resumo / Principais Pontos de Atenção 
+
 
 1. **A Física dita as Regras:** Computadores usam o sistema binário ($0$ e $1$) devido à estabilidade dos transistores frente a ruídos elétricos. Outros sistemas (como o decimal) gerariam erros frequentes.
 2. **Bit vs. Byte:** Bit é a menor unidade ($0$ ou $1$). Byte é o conjunto de $8$ bits, oferecendo $256$ combinações possíveis ($2^8$), base da medição de memória.
@@ -244,6 +245,134 @@ graph TD
 
 ---
 
+## 3. Arquitetura básica: entrada, processamento e saída
+
+Um smartwatch e um servidor da AWS parecem ter praticamente nada em comum, mas por dentro eles acabam seguindo o mesmo roteiro, descrito pelo modelo de Von Neumann. Os dados entram, passam por um processador que usa a memória como apoio e saem em forma de resultado.
+
+Para ambientar melhor, pense em uma cozinha de qualquer restaurante: o pedido do cliente é a entrada, o cozinheiro que segue a receita é o processador, a bancada com a receita e os ingredientes à mão é a memória, e o prato entregue na mesa é a saída.
+
+```mermaid
+flowchart LR
+    A["input<br/>teclado, mouse, rede"] --> B["CPU<br/>processamento"]
+    B <--> C["Memória<br/>dados + instruções"]
+    B --> D["output<br/>monitor, som, rede"]
+```
+
+>[!IMPORTANT] 
+> Programa e dados dividem a mesma memória. Esse é o ponto central do modelo de Von Neumann e explica por que um único computador consegue rodar qualquer programa, bastando carregá-lo na memória.
+
+Cada bloco do diagrama merece uma olhada mais atenciosa.
+
+### 3.1 Entrada (_input_)
+
+A entrada é qualquer caminho por onde dados chegam ao computador vindos de fora. Pode ser uma tecla pressionada, um clique, a voz captada pelo microfone, uma página pedida pela internet ou um arquivo lido do disco. Tudo isso chega como sinais elétricos e, como explicado no começo do artigo, vira sequências de 0 e 1.
+
+### 3.2 Processamento: a CPU
+
+A CPU (_Central Processing Unit_) é o cérebro do computador. É ela que faz as contas com os números que recebe, decide o que mostrar na tela e executa, uma a uma, as instruções do programa.
+
+Duas características aparecem com bastante frequência nas especificações de um processador:
+
+- **Núcleos (_cores_):** cada núcleo é capaz de executar instruções por conta própria. Um processador com quatro núcleos consegue trabalhar em até quatro tarefas ao mesmo tempo, como tocar um vídeo, checar a ortografia de um texto e imprimir um arquivo.
+- **Velocidade em GHz:** um gigahertz equivale a 1 bilhão de ciclos (pulsos de clock) por segundo. Um processador de 3 GHz "bate" cerca de 3 bilhões de vezes a cada segundo, e a cada pulso realiza uma parte do trabalho.
+
+Em celulares, tablets e videogames, a CPU costuma vir junto com outros componentes em um único chip, chamado de **SoC** (_System on a Chip_), em vez de ficar separada em uma placa maior.
+
+### 3.3 Memória: RAM, armazenamento e cache
+
+Para trabalhar, a CPU precisa ter os dados e as instruções por perto. Existem vários tipos de memória, que se diferenciam em velocidade, tamanho e permanência.
+
+|Tipo|Velocidade|Guarda os dados sem energia?|Tamanho típico|Papel|
+|---|---|---|---|---|
+|**Cache**|Altíssima|Não|De kilobytes a dezenas de megabytes|Deixa à mão o que a CPU vai usar em seguida|
+|**RAM**|Alta|Não|Alguns gigabytes|Guarda programas e arquivos que estão abertos|
+|**SSD**|Média|Sim|Centenas de gigabytes a terabytes|Armazenamento permanente, sem partes móveis|
+|**HD**|Mais baixa|Sim|Centenas de gigabytes a terabytes|Armazenamento permanente, com discos que giram|
+
+Agora, voltando à cozinha, o cache é o que o cozinheiro mantém ao alcance da mão, a RAM é a bancada de trabalho e o disco (SSD ou HD) é a despensa. A despensa guarda muito mais coisa, mas buscar algo nela leva mais tempo.
+
+```mermaid
+flowchart LR
+    D["Disco (SSD/HD)<br/>grande, mais lento, permanente"] <--> R["RAM<br/>média, rápida, temporária"]
+    R <--> C["Cache<br/>pequeno, super rápido"]
+    C <--> P["CPU"]
+```
+
+Assim que se abre um programa, ele é copiado do disco para a RAM. Os dados mais usados sobem ainda mais, até o cache, e chegam à CPU. Quando o computador é desligado, a RAM perde o conteúdo, e é por isso que o trabalho precisa ser salvo no disco.
+
+>[!NOTE]
+>  Esse caminho dos dados, do disco até a CPU, vai fazer diferença quando o artigo seguinte falar de como os processadores funcionam por dentro.
+
+### 3.4 Saída (_output_)
+
+A saída é o resultado entregue pelo computador, como a letra desenhada no monitor, o som no alto-falante, a resposta enviada pela internet ou o arquivo gravado no disco. Em um servidor, a saída costuma ser uma resposta enviada para outro computador.
+
+### 3.5 Um exemplo completo
+
+Ao escrever a letra `A` em um editor de texto, o caminho é este:
+
+1. **Antes de tudo:** o editor de texto sai do disco e vai para a RAM no momento em que é aberto.
+2. **Entrada:** ao pressionar a tecla, o teclado envia um sinal para o computador.
+3. **Processamento:** a CPU recebe o sinal, consulta as instruções do editor na RAM e entende que se trata da letra `A`.
+4. **Memória:** o caractere é guardado na RAM junto com o restante do texto.
+5. **Saída:** a CPU manda o monitor desenhar a letra na tela.
+6. **Ao salvar:** o conteúdo é copiado da RAM para o disco, onde permanece mesmo com o computador desligado.
+
+Tudo isso acontece em frações de segundo.
+
+### 3.6 Placa-mãe e barramentos
+
+A **placa-mãe** é a placa de circuitos onde a CPU, a RAM e os demais componentes se conectam. Ela funciona como um ponto central de comunicação entre todas as peças.
+
+Os componentes se comunicam pelos **barramentos** (_buses_), os “caminhos” por onde os dados andam. Para entender isso é fácil, basta pensar num ônibus que faz sempre a mesma rota, levando passageiros de um ponto a outro. Esses caminhos carregam três tipos de informação:
+
+- **Dados:** o conteúdo que está sendo movimentado.
+- **Endereços:** a indicação de onde, na memória, o dado deve ser lido ou gravado.
+- **Controle:** os sinais que coordenam quem fala e quando.
+
+Um exemplo conhecido é o **USB** (_Universal Serial Bus_), que liga ao computador teclados, mouses, impressoras e pendrives.
+
+>[!NOTE] 
+> Quem quiser ver essas peças em um computador de verdade encontra uma indicação de aula na seção 4.
+
+## 4. Para ir além: Harvard CS50
+
+Este artigo apresenta o básico de como um computador funciona por dentro. Esta seção mostra como seguir adiante a partir daqui.
+
+>[!TIP] 
+> A aula **[Week 1: Hardware, do CS50T (CS50's Understanding Technology)](https://cs50.harvard.edu/technology/weeks/1/)** é a recomendação de estudo para quem quer ver esses conceitos na prática.
+> 
+> A Harvard oferece cursos gratuitos de altíssimo nível na família **CS50** (**CS50T**, **CS50x**, **CS50P** e **CS50W**), com **certificados gratuitos**. É uma referência mundial para quem está construindo a base em computação.
+
+>[!IMPORTANT]
+>  O CS50T encerrou as atividades em 30 de junho de 2024 e consta como descontinuado. O material continua no ar como acervo, e a aula de hardware segue disponível para estudo.
+
+### O que a aula de hardware ensina
+
+A aula começa contando em binário com lâmpadas e termina com o professor desmontando computadores de verdade na câmera. No meio do caminho, passa por ASCII, CPU e memória. O vídeo é dividido em capítulos, e a tabela abaixo mostra o que cada um aborda.
+
+|Parte da aula|Seção do artigo|O que acontece|
+|---|---|---|
+|**Binary, Binary Lamps, ASCII e HI**|Seções 1 e 2|Mostra como contar usando só 0 e 1, com lâmpadas representando bits. Depois explica como números viram letras com a tabela ASCII, incluindo o exemplo da palavra "HI" em dois bytes|
+|**CPU e System on a Chip**|Seção 3 (processamento)|Apresenta a CPU como o cérebro do computador, fala de núcleos e de como celulares e consoles juntam vários componentes em um chip só|
+|**RAM, Hard Disk e Flash Memory**|Seção 3 (memória)|Compara a memória que perde os dados sem energia com os discos que os guardam de forma permanente, mostrando um HD funcionando por dentro|
+|**Funneling, Other Types of Memory e Candy Store**|Seção 3 (memória)|Explica o "funil" por onde os dados descem do disco até a CPU e usa uma loja de doces para ensinar o que é cache|
+|**Display Connectors, USB e Wireless Communication**|Seção 3 (entrada, saída e barramentos)|Passa pelos conectores de vídeo, pelas portas USB e pelas conexões sem fio, como Wi-Fi e Bluetooth|
+|**Operating System**|Próximos artigos|Mostra que o sistema operacional é o software que faz todas as peças conversarem|
+|**Looking at Hardware (Outside, Inside, Inside a Hard Drive, Motherboard e Solid State Drive)**|Seção 3 (placa-mãe e barramentos)|Abre um notebook antigo, um desktop, um HD e uma placa-mãe para ver cada componente de perto|
+
+### Qual curso CS50 escolher
+
+A família tem ainda outros cursos, como CS50 AI, CS50 SQL e CS50 Cybersecurity, listados no [site do CS50](https://cs50.harvard.edu/). Um caminho possível para quem está começando do zero é este aqui:
+
+```mermaid
+flowchart LR
+    A["CS50T Week 1<br/>hardware (acervo)"] --> B["CS50x<br/>ciência da computação"]
+    A --> C["CS50P<br/>Python"]
+    B --> D["CS50W<br/>desenvolvimento web"]
+    C --> D
+```
+
 ## 5. Referências e Materiais Recomendados
 
 * [CS50 Harvard - Lecture 0: Computational Thinking & Representation](https://cs50.harvard.edu/x/)
@@ -251,5 +380,3 @@ graph TD
 * [RFC 3629 - UTF-8, a transformation format of ISO 10646](https://datatracker.ietf.org/doc/html/rfc3629)
 
 ---
-*Navegação:*
-[← Voltar ao Módulo Principal](../../README.md) | [Próximo Artigo: Como os Processadores Funcionam →](02-como-os-processadores-funcionam.md)
