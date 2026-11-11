@@ -146,7 +146,7 @@ De maneira simplificada:
 
 O diagrama abaixo representa esse processo de maneira simplificada:
 
-![Diagrama dos componentes da CPU](../../assets/01-fundamentos/diagrama-componentes-cpu.png)
+![Diagrama dos componentes da CPU](../../assets/01-fundamentos/diagrama-componentes-cpu.png.png)
 
 Esse exemplo demonstra que os componentes não trabalham isoladamente. Eles cooperam para executar as operações necessárias ao funcionamento dos programas.
 
@@ -301,7 +301,7 @@ R3 = 15
 
 O diagrama abaixo apresenta uma representação simplificada do ciclo Fetch–Decode–Execute.
 
-![Diagrama do ciclo Fetch-Decode-Execute](../../assets/01-fundamentos/diagrama-ciclo-instrucao.png)
+![Diagrama do ciclo Fetch-Decode-Execute](../../assets/01-fundamentos/diagrama-ciclo-instrucao.png.png)
 
 Esse ciclo permite compreender a lógica fundamental da execução de instruções.
 
