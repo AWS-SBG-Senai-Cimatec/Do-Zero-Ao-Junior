@@ -90,12 +90,25 @@ graph TD
 
 ---
 
-### Guia de Estudo Sem Pressa (WSL)
-Se você usa Windows, não precisa formatar seu computador ou criar partições complexas para aprender Linux. O **WSL (Windows Subsystem for Linux)** permite rodar um ambiente Ubuntu nativo diretamente dentro do Windows, com integração total aos seus arquivos e ao VS Code.
+## 4. Aprendendo Linux aos Poucos
+
+> [!IMPORTANT]
+> **Calma, você não precisa abandonar o seu sistema hoje.**
+> * Não é preciso desinstalar o Windows ou o macOS.
+> * Não é preciso decorar centenas de comandos de uma vez.
+> * O jeito mais inteligente de aprender Linux é **aos poucos**, conforme a necessidade surge nos seus projetos. Ele é uma construção contínua ao longo da carreira.
+
+### Como praticar sem formatar o PC
+* **WSL 2 (Windows Subsystem for Linux):** abre um terminal **Ubuntu de verdade** dentro do próprio Windows, em poucos minutos e com integração aos seus arquivos e ao VS Code. Em um PowerShell como administrador, basta rodar `wsl --install`.
+* **Máquina virtual:** programas como VirtualBox permitem rodar um Linux completo em uma janela, isolado do seu sistema.
+* **Git Bash:** instalado junto com o Git no Windows, já traz vários comandos básicos do mundo Unix/Linux (`ls`, `cd`, `cat`...) e é uma ótima porta de entrada.
+
+### Onde consultar comandos quando precisar
+Guarde nos favoritos o artigo [Linux Command Cheat Sheet: 100 Essential Commands for System Administration and Development](https://medium.com/m/global-identity/?redirectUrl=https%3A%2F%2Fjavascript.plainenglish.io%2Flinux-command-cheat-sheet-100-essential-commands-2f3b925f231e). Ele funciona como uma "cola" ou dicionário de bolso: você não precisa ler tudo agora, apenas consultar e explorar aos poucos, quando um comando novo for necessário.
 
 ---
 
-## 4. Resumo / Principais Pontos de Atenção (Key Takeaways)
+## 6. Resumo / Principais Pontos de Atenção (Key Takeaways)
 
 * **Linux não é um bicho de sete cabeça:** O terminal é apenas uma forma direta e eficiente de dar instruções ao computador.
 * **Open Source é padrão de indústria:** Grandes empresas mantêm o ecossistema Linux por sua segurança, flexibilidade e confiabilidade.
@@ -105,7 +118,7 @@ Se você usa Windows, não precisa formatar seu computador ou criar partições 
 
 ---
 
-## 5. Referências e Materiais Recomendados
+## 7. Referências e Materiais Recomendados
 
 * [Linux Command Cheat Sheet: 100 Essential Commands (Medium)](https://medium.com/m/global-identity/?redirectUrl=https%3A%2F%2Fjavascript.plainenglish.io%2Flinux-command-cheat-sheet-100-essential-commands-2f3b925f231e)
 * ⬅️ **Artigo Anterior:** [`01-sistemas-operacionais.md`](./01-sistemas-operacionais.md)
