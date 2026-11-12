@@ -108,6 +108,28 @@ Guarde nos favoritos o artigo [Linux Command Cheat Sheet: 100 Essential Commands
 
 ---
 
+## 5. Os 10 Comandos Essenciais de Sobrevivência no Terminal
+
+Estes 10 comandos resolvem a maior parte da navegação básica no dia a dia de um Dev Júnior. Você pode praticá-los no WSL, no Git Bash ou em qualquer terminal Linux.
+
+| Comando | O que significa | Para que serve na prática | Exemplo rápido |
+| :--- | :--- | :--- | :--- |
+| `pwd` | *Print Working Directory* | Mostra em qual pasta você está agora | `pwd` |
+| `ls` | *List* | Lista os arquivos e pastas do diretório atual | `ls -la` |
+| `cd` | *Change Directory* | Entra ou sai de uma pasta | `cd projetos` / `cd ..` |
+| `mkdir` | *Make Directory* | Cria uma nova pasta | `mkdir meu-app` |
+| `cp` | *Copy* | Copia arquivos ou pastas | `cp config.example.json config.json` |
+| `mv` | *Move* | Move ou renomeia arquivos e pastas | `mv antigo.txt novo.txt` |
+| `rm` | *Remove* | Apaga arquivos ou pastas (com cuidado!) | `rm arquivo.txt` |
+| `cat` | *Concatenate* | Exibe o conteúdo de um arquivo de texto direto no terminal | `cat README.md` |
+| `sudo` | *Superuser Do* | Executa um comando com permissão de administrador (root) | `sudo apt update` |
+| `apt` | *Advanced Package Tool* | Instala e atualiza programas no Debian/Ubuntu (como uma "loja de apps" via terminal) | `sudo apt install git` |
+
+> [!WARNING]
+> **Cuidado com o `rm` e o `sudo`.** No terminal não existe lixeira: o que o `rm` apaga não volta. E o `sudo` dá poder total sobre o sistema, então só use com comandos que você entende.
+
+---
+
 ## 6. Resumo / Principais Pontos de Atenção (Key Takeaways)
 
 * **Linux não é um bicho de sete cabeça:** O terminal é apenas uma forma direta e eficiente de dar instruções ao computador.
