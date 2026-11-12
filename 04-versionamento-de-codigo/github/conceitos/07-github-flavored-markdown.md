@@ -239,4 +239,4 @@ Closes #12
 
 ---
 
-[← Anterior: 06 - Estratégias de Versionamento](../06-estrategias-versionamento/estrategias-versionamento.md)
+[← Anterior: 06 - Estratégias de Versionamento](06-estrategias-versionamento.md)
