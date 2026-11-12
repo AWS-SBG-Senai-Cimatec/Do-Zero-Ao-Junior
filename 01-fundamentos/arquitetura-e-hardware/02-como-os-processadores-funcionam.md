@@ -325,16 +325,112 @@ Dessa forma, conseguimos perceber que a ULA, a Unidade de Controle e os registra
 
 ## 3. Clock, Cores, Threads e Memória Cache
 
-<!--
-Seção reservada para o Diego.
+Quando você vai contratar um servidor na nuvem (como uma instância *AWS EC2) ou escolher um notebook de trabalho, pode notar algumas especificações como *"4 vCPUs, 3.5 GHz, 8MB Cache L3". Aqui você pode compreender os significados para otimizar custos e evitar dificuldades.
 
-Conteúdos a adicionar:
-- Clock e frequência em GHz.
-- Diferença entre núcleos (cores) e threads.
-- Memória cache L1, L2 e L3.
+---
 
-Integrar o conteúdo antes de finalizar o artigo.
--->
+### 3.1. Clock (GHz)
+
+O **Clock** é o sinal elétrico ritmado que dita a velocidade máxima com que a CPU executa instruções. Pense nele como o **metrônomo de um músico**.
+
+* **O que significa GHz?** 1 Hertz (Hz) equivale a 1 ciclo por segundo. Logo, **3.0 GHz significa 3 bilhões de ciclos por segundo**.
+* **O Mito da Frequência:** Nem sempre um processador com maior GHz é mais rápido que outro com menor GHz. A velocidade real depende do número de **IPC (Instruções Por Ciclo)** que a arquitetura do chip consegue processar no mesmo pulso de clock.
+
+> [!]
+> **Por que o Clock parou de subir sem parar, mesmo com inovações?**
+> Antigamente, a corrida das fabricantes era apenas aumentar os GHz. No entanto, surgiu a preocupação com a **Barreira Térmica (Thermal Wall)**: aumentar mais o clock gera um calor absurdo e consome energia desproporcional, arriscando derreter o silício.
+
+---
+
+### 3.2. Cores (Núcleos Físicos)
+
+Para continuar aumentando o desempenho dos computadores sem explodir o consumo de energia, a indústria mudou a estratégia: em vez de fazer um único núcleo rodar cada vez mais rápido, colocaram **vários núcleos físicos independentes dentro do mesmo chip** (arquitetura *Multi-core*).
+
+* **Single-core vs. Multi-core:** Um processador *Quad-Core* possui **4 mini-processadores físicos** completos no mesmo chip, permitindo executar 4 tarefas simultaneamente de forma real.
+
+> [!DICA]
+> **Aplicação para Devs:**
+> Aplicações escritas para rodar em uma única *thread* (como o modelo padrão do Node.js ou scripts em Python puro) utilizam apenas **1 único Core** por padrão, deixando os demais livres para o Sistema Operacional ou outros processos.
+
+---
+
+### 3.3. Threads
+
+Enquanto o **Core** é a unidade física de processamento, a **Thread** (no contexto de hardware) representa um **fluxo lógico de execução**. 
+
+Para evitar que um núcleo físico fique ocioso enquanto espera dados chegarem da memória RAM, tecnologias como **Hyper-Threading (Intel)** e **SMT (AMD)** permitem que **1 núcleo físico gerencie 2 fluxos lógicos simultaneamente**.
+
+* 🍳 **Analogy do Cozinheiro:**
+  * **Core (Núcleo Físico):** Um cozinheiro.
+  * **1 Thread por Core:** O cozinheiro usa apenas a mão direita para cortar vegetais.
+  * **2 Threads por Core (Hyper-Threading):** O cozinheiro usa a mão esquerda para adiantar o corte da carne enquanto a mão direita cuida da panela. Ele continua sendo **um único cozinheiro (1 Core)**, mas aproveita seu tempo ocioso para adiantar **duas tarefas (2 Threads)**.
+
+> [!IMPORTANTE]
+> **Na Nuvem AWS:**
+> Em instâncias AWS EC2, **1 vCPU (Virtual CPU)** equivale geralmente a **1 Thread lógica** (hyper-thread) do processador físico, e não a um núcleo inteiro dedicado.
+
+---
+
+### 3.4. Memória Cache (L1, L2, L3): A Ponte Entre a CPU e a RAM
+
+A memória RAM é rápida, mas para a velocidade atômica da CPU, ela ainda é extremamente lenta (a busca na RAM pode levar centenas de ciclos de clock ociosos, gerando o chamado *Cache Miss*). 
+
+Para resolver isso, os processadores possuem a **Memória Cache**: pequenas áreas de memória ultrarrápida (SRAM) construídas dentro do próprio chip da CPU.
+
+* 🎒 **Analogia do Bolso do Cozinheiro:**
+  * **Registradores:** Os ingredientes que já estão nas mãos do cozinheiro.
+  * **Cache L1:** Os temperos no bolso (acesso instantâneo, espaço mínimo).
+  * **Cache L2:** Os ingredientes organizados na bancada de trabalho.
+  * **Cache L3:** A prateleira compartilhada da cozinha (maior espaço, um pouco mais distante).
+  * **RAM:** O estoque nos fundos do restaurante (muito espaço, mas exige caminhar até lá).
+
+#### Níveis da Memória Cache:
+
+1. **L1 (Level 1):** Minúscula (~32KB a 128KB por núcleo), fica integrada ao núcleo e roda na velocidade exata da CPU.
+2. **L2 (Level 2):** Intermediária (~512KB a 2MB por núcleo), rápida e dedicada a cada núcleo.
+3. **L3 (Level 3):** Maior (~8MB a 64MB+), **compartilhada** por todos os núcleos físicos do chip.
+
+---
+
+### 3.5. Tabela Comparativa: Hierarquia de Memória
+
+| Camada | Localização | Velocidade Relativa | Capacidade Típica | Finalidade Principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Registradores** | Dentro do Core (ULA/UC) | Imensurável (< 1 ns) | Bytes (~1 KB total) | Operações matemáticas e lógicas iminentes. |
+| **Cache L1** | Dentro de cada Core | Extrema (~1-2 ns) | 32 KB - 128 KB | Armazenar instruções e dados do próximo passo imediato. |
+| **Cache L2** | Junto ao Core | Muito Alta (~3-5 ns) | 512 KB - 2 MB | Reter dados locais frequentemente reusados. |
+| **Cache L3** | No Chip (Compartilhada) | Alta (~10-20 ns) | 8 MB - 64 MB+ | Troca eficiente de dados entre múltiplos núcleos. |
+| **Memória RAM** | Placa-Mãe (Externa) | Moderada (~50-100 ns) | 8 GB - 128 GB+ | Guardar programas em execução e dados do SO. |
+
+---
+
+### 3.6. Arquitetura em Ação (Fluxo de Execução)
+
+O diagrama abaixo ilustra como os Cores, Threads e níveis de Cache se organizam internamente no chip da CPU:
+
+```mermaid
+flowchart TD
+    subgraph CPU["Chip do Processador (SoC)"]
+        subgraph L3["Cache L3 (Compartilhada por todos os Cores)"]
+            subgraph CORE1["Núcleo Físico 1 (Core 1)"]
+                L1_1["Cache L1 / L2"]
+                T1["Thread Lógica 1"]
+                T2["Thread Lógica 2"]
+            end
+
+            subgraph CORE2["Núcleo Físico 2 (Core 2)"]
+                L1_2["Cache L1 / L2"]
+                T3["Thread Lógica 3"]
+                T4["Thread Lógica 4"]
+            end
+        end
+    end
+
+    RAM[("Memória RAM Principal")] <--> L3
+    L3 <--> L1_1
+    L3 <--> L1_2
+    L1_1 <--> T1 & T2
+    L1_2 <--> T3 & T4
 
 ---
 
