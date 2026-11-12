@@ -53,13 +53,27 @@ O ecossistema moderno de desenvolvimento foi construído sobre o Linux:
 
 ---
 
-## 3. Estrutura e Ecossistema Linux
+## 3. O que é uma "Distribuição" (Distro) e o destaque para Debian e Ubuntu
+
+### O conceito de Distro
+Lembra que o Linux, na verdade, é apenas o **Kernel** (o motor)? Sozinho, ele não serve para o dia a dia, assim como um motor solto não leva ninguém ao trabalho. Uma **Distribuição Linux** (ou *distro*) é o **"carro completo" pronto para uso**:
+
+* **Kernel Linux:** o motor que conversa com o hardware.
+* **Gerenciador de pacotes:** a "loja de apps" do terminal, que instala, atualiza e remove programas.
+* **Ferramentas de terminal:** os utilitários GNU e outros programas essenciais.
+* **Interface gráfica (opcional):** janelas, menus e ícones, presentes em versões para desktop e normalmente ausentes em servidores.
+
+Como o Linux é aberto, qualquer pessoa ou empresa pode montar a sua própria combinação. Por isso existem centenas de distros. Neste material vamos focar na família **Debian**.
 
 ### A Árvore Genealógica: Debian → Ubuntu
-Como o Linux é aberto, surgiram várias **Distribuições** (versões customizadas do sistema). Uma das famílias mais importantes é a baseada no **Debian**:
 
-* **Debian:** Conhecido por sua estabilidade extrema e rigor no controle de pacotes. É a base de fundação.
-* **Ubuntu:** Criado a partir do Debian, o Ubuntu adicionou facilidade de uso, excelente documentação e forte suporte da comunidade, tornando-se a distribuição mais popular para desenvolvedores e servidores na nuvem.
+* **Debian:** uma das distribuições mais antigas, respeitadas e independentes do mundo, mantida por uma comunidade de voluntários. É famosa pela **estabilidade lendária** e pela **segurança**. É a base da maioria das imagens oficiais do Docker e de incontáveis servidores críticos.
+* **Ubuntu:** baseada diretamente no Debian e mantida pela empresa **Canonical**, foi criada para ser **amigável, moderna e acessível**. Tem a maior comunidade, uma enorme quantidade de tutoriais na internet e amplo suporte oficial em provedores de nuvem como a **AWS**.
+
+### Por que focar em Debian e Ubuntu?
+* **Mesma família, mesmos comandos:** o que você aprende em uma funciona na outra (incluindo o gerenciador `apt`).
+* **Presença no mercado:** estão por toda parte em servidores, na nuvem e dentro de contêineres.
+* **Ótimo ponto de partida:** documentação farta e comunidade ativa para tirar dúvidas.
 
 ```mermaid
 graph TD
