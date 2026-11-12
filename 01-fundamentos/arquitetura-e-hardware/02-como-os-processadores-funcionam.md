@@ -360,7 +360,7 @@ Enquanto o **Core** é a unidade física de processamento, a **Thread** (no cont
 
 Para evitar que um núcleo físico fique ocioso enquanto espera dados chegarem da memória RAM, tecnologias como **Hyper-Threading (Intel)** e **SMT (AMD)** permitem que **1 núcleo físico gerencie 2 fluxos lógicos simultaneamente**.
 
-* 🍳 **Analogy do Cozinheiro:**
+* 🍳 **Analogia do Cozinheiro:**
   * **Core (Núcleo Físico):** Um cozinheiro.
   * **1 Thread por Core:** O cozinheiro usa apenas a mão direita para cortar vegetais.
   * **2 Threads por Core (Hyper-Threading):** O cozinheiro usa a mão esquerda para adiantar o corte da carne enquanto a mão direita cuida da panela. Ele continua sendo **um único cozinheiro (1 Core)**, mas aproveita seu tempo ocioso para adiantar **duas tarefas (2 Threads)**.
@@ -444,7 +444,7 @@ flowchart TD
 - O ciclo **Fetch–Decode–Execute** descreve as etapas fundamentais de busca, decodificação e execução de instruções.
 - A execução de programas reais envolve diversos componentes e pode utilizar técnicas mais avançadas do que o modelo simplificado apresentado.
 - O **Clock (GHz)** indica a frequência máxima de pulsos por segundo do processador, mas parou de crescer isoladamente devido à *Barreira Térmica*.
-- **Cores (Núcleos Físicos)** são processadores independentes no mesmo chip; **Threads** são fluxos lógicos de execução que otimizam o tempo ocioso do núcleo física (tecnologia Hyper-Threading / SMT).
+- **Cores (Núcleos Físicos)** são processadores independentes no mesmo chip; **Threads** são fluxos lógicos de execução que otimizam o tempo ocioso do núcleo físico (tecnologia Hyper-Threading / SMT).
 - A **Memória Cache (L1, L2, L3)** é uma camada ultrarrápida situada entre a CPU e a RAM, essencial para prevenir ociosisdade (*Cache Miss*).
 
 ---
