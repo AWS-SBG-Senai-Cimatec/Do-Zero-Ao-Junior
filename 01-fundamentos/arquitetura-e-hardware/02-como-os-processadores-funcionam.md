@@ -336,7 +336,7 @@ O **Clock** é o sinal elétrico ritmado que dita a velocidade máxima com que a
 * **O que significa GHz?** 1 Hertz (Hz) equivale a 1 ciclo por segundo. Logo, **3.0 GHz significa 3 bilhões de ciclos por segundo**.
 * **O Mito da Frequência:** Nem sempre um processador com maior GHz é mais rápido que outro com menor GHz. A velocidade real depende do número de **IPC (Instruções Por Ciclo)** que a arquitetura do chip consegue processar no mesmo pulso de clock.
 
-> [!]
+> [!NOTE]
 > **Por que o Clock parou de subir sem parar, mesmo com inovações?**
 > Antigamente, a corrida das fabricantes era apenas aumentar os GHz. No entanto, surgiu a preocupação com a **Barreira Térmica (Thermal Wall)**: aumentar mais o clock gera um calor absurdo e consome energia desproporcional, arriscando derreter o silício.
 
@@ -348,7 +348,7 @@ Para continuar aumentando o desempenho dos computadores sem explodir o consumo d
 
 * **Single-core vs. Multi-core:** Um processador *Quad-Core* possui **4 mini-processadores físicos** completos no mesmo chip, permitindo executar 4 tarefas simultaneamente de forma real.
 
-> [!DICA]
+> [!TIP]
 > **Aplicação para Devs:**
 > Aplicações escritas para rodar em uma única *thread* (como o modelo padrão do Node.js ou scripts em Python puro) utilizam apenas **1 único Core** por padrão, deixando os demais livres para o Sistema Operacional ou outros processos.
 
@@ -365,7 +365,7 @@ Para evitar que um núcleo físico fique ocioso enquanto espera dados chegarem d
   * **1 Thread por Core:** O cozinheiro usa apenas a mão direita para cortar vegetais.
   * **2 Threads por Core (Hyper-Threading):** O cozinheiro usa a mão esquerda para adiantar o corte da carne enquanto a mão direita cuida da panela. Ele continua sendo **um único cozinheiro (1 Core)**, mas aproveita seu tempo ocioso para adiantar **duas tarefas (2 Threads)**.
 
-> [!IMPORTANTE]
+> [!IMPORTANT]
 > **Na Nuvem AWS:**
 > Em instâncias AWS EC2, **1 vCPU (Virtual CPU)** equivale geralmente a **1 Thread lógica** (hyper-thread) do processador físico, e não a um núcleo inteiro dedicado.
 
