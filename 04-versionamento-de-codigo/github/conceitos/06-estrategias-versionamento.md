@@ -152,4 +152,4 @@ A escolha mais natural é o **GitHub Flow**: `main` protegida, branches curtas, 
 
 ---
 
-[← Anterior: 05 - Code Review](../05-code-review/code-review.md) | [Próximo: 07 - GitHub Flavored Markdown →](../07-github-flavored-markdown/github-flavored-markdown.md)
+[← Anterior: 05 - Code Review](05-code-review.md) | [Próximo: 07 - GitHub Flavored Markdown →](07-github-flavored-markdown.md)
