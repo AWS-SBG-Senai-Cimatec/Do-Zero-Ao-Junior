@@ -430,7 +430,8 @@ flowchart TD
     L3 <--> L1_1
     L3 <--> L1_2
     L1_1 <--> T1 & T2
-    L1_2 <--> T3 & T4
+    L1_2 <--> T3 & T4 
+```
 
 ---
 
@@ -442,8 +443,9 @@ flowchart TD
 - Os **registradores** armazenam pequenas quantidades de dados com acesso extremamente rápido.
 - O ciclo **Fetch–Decode–Execute** descreve as etapas fundamentais de busca, decodificação e execução de instruções.
 - A execução de programas reais envolve diversos componentes e pode utilizar técnicas mais avançadas do que o modelo simplificado apresentado.
-
-<!-- Atualizar esta seção depois de integrar o conteúdo do Diego. -->
+- O **Clock (GHz)** indica a frequência máxima de pulsos por segundo do processador, mas parou de crescer isoladamente devido à *Barreira Térmica*.
+- **Cores (Núcleos Físicos)** são processadores independentes no mesmo chip; **Threads** são fluxos lógicos de execução que otimizam o tempo ocioso do núcleo física (tecnologia Hyper-Threading / SMT).
+- A **Memória Cache (L1, L2, L3)** é uma camada ultrarrápida situada entre a CPU e a RAM, essencial para prevenir ociosisdade (*Cache Miss*).
 
 ---
 
@@ -463,12 +465,6 @@ flowchart TD
 
 ---
 
-<!--
-CHECKLIST ANTES DO PULL REQUEST:
-
-- Integrar a seção 3 produzida pelo Diego.
-- Atualizar o resumo para abranger o artigo completo.
-- Revisar as referências bibliográficas.
-- Conferir se os diagramas Mermaid renderizam no GitHub.
-- Solicitar revisão ao responsável pela issue.
--->
+### ⬅️ Navegação entre Artigos
+- ⬅️ **Anterior:** [01 - Como funciona um computador](../arquitetura-e-hardware/01-como-funciona-um-computador.md)
+- ➡️ **Próximo:** [03 - Como os programas passam na memória](../arquitetura-e-hardware/03-como-os-programas-rodam-na-memoria.md)
