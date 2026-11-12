@@ -96,15 +96,15 @@ graph TD
 > **Calma, você não precisa abandonar o seu sistema hoje.**
 > * Não é preciso desinstalar o Windows ou o macOS.
 > * Não é preciso decorar centenas de comandos de uma vez.
-> * O jeito mais inteligente de aprender Linux é **aos poucos**, conforme a necessidade surge nos seus projetos. Ele é uma construção contínua ao longo da carreira.
+> * O jeito mais inteligente de aprender Linux é **aos poucos**, conforme a necessidade surge nos seus projetos. Esse aprendizado é uma construção contínua e natural ao longo da carreira.
 
 ### Como praticar sem formatar o PC
-* **WSL 2 (Windows Subsystem for Linux):** abre um terminal **Ubuntu de verdade** dentro do próprio Windows, em poucos minutos e com integração aos seus arquivos e ao VS Code. Em um PowerShell como administrador, basta rodar `wsl --install`.
+* **WSL 2 (Windows Subsystem for Linux):** abre um terminal **Ubuntu de verdade** dentro do próprio Windows, em poucos minutos e com integração aos seus arquivos e ao VS Code. Basta abrir o PowerShell como administrador, rodar `wsl --install` e reiniciar o computador.
 * **Máquina virtual:** programas como VirtualBox permitem rodar um Linux completo em uma janela, isolado do seu sistema.
 * **Git Bash:** instalado junto com o Git no Windows, já traz vários comandos básicos do mundo Unix/Linux (`ls`, `cd`, `cat`...) e é uma ótima porta de entrada.
 
 ### Onde consultar comandos quando precisar
-Guarde nos favoritos o artigo [Linux Command Cheat Sheet: 100 Essential Commands for System Administration and Development](https://medium.com/m/global-identity/?redirectUrl=https%3A%2F%2Fjavascript.plainenglish.io%2Flinux-command-cheat-sheet-100-essential-commands-2f3b925f231e). Ele funciona como uma "cola" ou dicionário de bolso: você não precisa ler tudo agora, apenas consultar e explorar aos poucos, quando um comando novo for necessário.
+Guarde nos favoritos o artigo [Linux Command Cheat Sheet: 100 Essential Commands for System Administration and Development](https://javascript.plainenglish.io/linux-command-cheat-sheet-100-essential-commands-2f3b925f231e). Ele funciona como uma "cola" ou dicionário de bolso: você não precisa ler tudo agora, apenas consultar e explorar aos poucos, quando um comando novo for necessário.
 
 ---
 
