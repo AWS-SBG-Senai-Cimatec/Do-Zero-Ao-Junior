@@ -8,7 +8,7 @@
 
 Depois que o código é escrito e a Pull Request é aberta, ele ainda não está pronto para entrar na `main`. Antes, outra pessoa da equipe precisa olhar o que foi feito. Esse processo é chamado de **code review** (revisão de código).
 
-No GitHub, a revisão acontece dentro da própria Pull Request: quem revisa lê as alterações, comenta, sugere mudanças e, no fim, da um parecer formal. Como vimos no arquivo [04 - Organizations](04-github-organizations.md), as **Branch Protection Rules** podem exigir um número mínimo de aprovações antes do merge, e é o code review que gera essas aprovações.
+No GitHub, a revisão acontece dentro da própria Pull Request: quem revisa lê as alterações, comenta, sugere mudanças e, no fim, dá um parecer formal. Como vimos, as **Branch Protection Rules** podem exigir um número mínimo de aprovações antes do merge, e é o code review que gera essas aprovações.
 
 ---
 
