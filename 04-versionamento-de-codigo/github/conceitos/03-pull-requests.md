@@ -64,7 +64,7 @@ Antes de passarmos para o próximo tópico, teste seu conhecimento:
 1. **Base branch:** `main` (é o destino final de onde o projeto vive).
 2. **Compare branch:** `fix/corrigir-header` (é a sua branch de trabalho que traz as correções).
 
-*Se acertou, parabéns! Se errou, não tem problema — a analogia do sistema de recupração ajuda a memorizar: a **Base** é o código oficial!*
+*Se acertou, parabéns! Se errou, não tem problema — a analogia do sistema de recuperação ajuda a memorizar: a **Base** é o código oficial!*
 </details>
 
 ---
