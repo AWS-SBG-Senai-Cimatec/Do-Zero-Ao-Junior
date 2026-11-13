@@ -13,7 +13,9 @@ A visibilidade define quem pode acessar o conteúdo do repositório.
 - **Público:** qualquer pessoa pode visualizar o conteúdo. É útil para projetos de portfólio e de código aberto.
 - **Privado:** o acesso fica restrito às pessoas autorizadas. É mais adequado para projetos internos, código proprietário ou trabalho confidencial.
 
-Deixar um repositório público não significa que outras pessoas têm permissão automática para reutilizar o código. Essa permissão é definida pela licença. Também não se deve enviar senhas, tokens ou outros dados confidenciais ao repositório.
+Deixar um repositório público não significa que outras pessoas têm permissão automática para reutilizar o código. Essa permissão é definida pela licença.
+> [!WARNING]
+> Não envie senhas, tokens ou outros dados confidenciais ao repositório.
 
 ## Por que a licença importa?
 
