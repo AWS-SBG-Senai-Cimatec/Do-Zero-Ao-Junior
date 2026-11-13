@@ -21,6 +21,9 @@ Deixar um repositório público não significa que outras pessoas têm permissã
 
 A licença informa o que outras pessoas podem fazer com o software, como copiar, modificar e distribuir o código. Sem uma licença, o código continua protegido por direitos autorais; outras pessoas podem visualizá-lo, mas não recebem automaticamente permissão para reutilizá-lo.
 
+> [!IMPORTANT]
+> **Risco jurídico para empresas:** Reutilizar código sem licença explícita — mesmo em repositórios públicos — configura violação de direitos autorais. No ambiente corporativo, essa prática expõe a empresa a processos judiciais, sanções financeiras, falhas em auditorias de *compliance* e à necessidade de reescrever ou remover trechos críticos de produtos comerciais.
+
 Algumas licenças comuns são:
 
 - **MIT:** permissiva e simples. Permite usar, modificar e distribuir o código, desde que os avisos de direitos autorais e a licença sejam mantidos.
