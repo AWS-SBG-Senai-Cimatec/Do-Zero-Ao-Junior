@@ -74,7 +74,7 @@ Coloque na ordem correta as ações que você deve realizar:
 
 Agora que você domina o **Fork** e o **Pull Request**, você possui todas as chaves para contribuir com **qualquer projeto público do planeta**!
 
-A dinamica do software livre funciona em uma dança perfeita de 4 passos:
+A dinâmica do software livre funciona em uma dança perfeita de 4 passos:
 
 ```
 [ Repositório Original ]  <--- (4) Pull Request --- [ Seu Fork no GitHub ]
