@@ -324,6 +324,6 @@ D. Um arquivo de texto com a extensão `.exe`.
 
 - [← Artigo relacionado: Como os programas rodam na memória](../arquitetura-e-hardware/03-como-os-programas-rodam-na-memoria.md)
 - [↑ Voltar ao README do Módulo 01](../README.md)
-- [→ Próximo artigo (caminho sugerido, ainda a criar): Linguagens compiladas e interpretadas](./02-linguagens-compiladas-e-interpretadas.md)
+- [→ Próximo artigo: Linguagens compiladas e interpretadas](./02-linguagens-compiladas-e-interpretadas.md)
 
 > **Continuação:** no próximo artigo, a ideia será comparar os caminhos de execução de linguagens como C, Go e Rust com os usados por Python, JavaScript e Java, explorando compilação, interpretação, bytecode e JIT.
